@@ -1,0 +1,65 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. TRATAMENTO_DADOS.
+       AUTHOR. "Victor".
+       DATE-WRITTEN. "16/01/2024".
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT DADOS-ARQUIVO ASSIGN TO 'DADOS.txt'
+           ORGANIZATION IS LINE SEQUENTIAL.
+
+           SELECT DADOS-ARQUIVO-OUT ASSIGN TO 'dados_saida.txt'
+           ORGANIZATION IS LINE SEQUENTIAL.
+
+       DATA DIVISION.
+       FILE SECTION.
+       FD DADOS-ARQUIVO.
+       01 REGISTRO.
+           05 CODIGO PIC 9(03).
+           05 VIRGULA PIC X(01).
+           05 NOME PIC x(20). 
+
+      
+       FD DADOS-ARQUIVO-OUT.
+       01 REGISTRO-OUT.
+           05 CODIGO-OUT PIC 9(03).
+           05 VIRGULA-OUT PIC X(01).
+           05 NOME-OUT PIC x(20). 
+           05 VIRGULA-OUT2 PIC X(01).
+           05 CIDADE-OUT PIC X(20).
+
+ 
+       WORKING-STORAGE SECTION.
+
+       01 FIM-ARQUIVO PIC X(01) VALUE 'N'.
+       01 FIM-PROGRAMA PIC X(01) VALUE 'N'.
+
+
+       PROCEDURE DIVISION.
+
+       MAIN-PROCEDURE.
+
+       OPEN INPUT DADOS-ARQUIVO
+       OPEN OUTPUT DADOS-ARQUIVO-OUT
+
+       PERFORM UNTIL FIM-ARQUIVO = 'S'
+           READ DADOS-ARQUIVO
+
+               AT END
+                   MOVE 'S' TO FIM-ARQUIVO
+               NOT AT END
+                   MOVE CODIGO TO CODIGO-OUT
+                   MOVE VIRGULA TO VIRGULA-OUT
+                   MOVE NOME TO NOME-OUT
+                   MOVE ',' TO VIRGULA-OUT2
+                   MOVE 'MINAS GERAIS' TO CIDADE-OUT
+                   WRITE REGISTRO-OUT
+
+
+           END-READ 
+       END-PERFORM
+       CLOSE DADOS-ARQUIVO
+       CLOSE DADOS-ARQUIVO-OUT
+
+
+       STOP RUN.
