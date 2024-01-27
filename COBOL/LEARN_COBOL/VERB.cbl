@@ -1,0 +1,16 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. VERB.
+
+       DATA DIVISION.
+           WORKING-STORAGE SECTION.
+           01 WS-STUDENT0-NAME PIC X(25).
+           01 WS-DATE PIC X(10).
+
+       PROCEDURE DIVISION.
+           ACCEPT WS-STUDENT0-NAME.
+           ACCEPT WS-DATE FROM DATE
+
+           DISPLAY "Name: " WS-STUDENT0-NAME.
+           DISPLAY "Date: " WS-DATE.
+
+           STOP RUN.
